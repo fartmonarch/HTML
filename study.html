@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>专门记录学习的页面</title>
+    <link href="styles/study.css" rel="stylesheet" />
+    <script src="scripts/loading.js"></script>
+     <link rel="icon" href="images/avatar.jpg" type="image/x-icon" />
+
+    <style>
+      body {
+        margin: 0;
+        height: 100vh;
+        background-color: #eee;
+      }
+
+      * {
+        border: 1px solid black;
+      }
+
+      .flex {
+        display: flex;
+      }
+
+      .center {
+        justify-content: center;
+        align-items: center;
+      }
+
+      .column {
+        flex-direction: column;
+      }
+
+      .daoHang {
+        padding: 10px 20px;
+        border-bottom: 1px solid rgb(190, 190, 190);
+        font-size: 14px;
+        color: #666;
+      }
+    </style>
+  </head>
+  <body class="flex">
+    <!-- Loading 覆盖层 -->
+    <div id="loading-overlay">
+      <svg
+        class="loading"
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        x="0px"
+        y="0px"
+        width="730px"
+        height="190px"
+        viewBox="0 0 730 120"
+        enable-background="new 0 0 574.558 120"
+        xml:space="preserve"
+      >
+        <defs>
+          <pattern
+            id="water"
+            width=".25"
+            height="1.1"
+            patternContentUnits="objectBoundingBox"
+          >
+            <path
+              fill="#fff"
+              d="M0.25,1H0c0,0,0-0.659,0-0.916c0.083-0.303,0.158,0.334,0.25,0C0.25,0.327,0.25,1,0.25,1z"
+            />
+          </pattern>
+
+          <text
+            id="text"
+            transform="matrix(1 0 0 1 -8.0684 116.7852)"
+            font-size="161.047"
+          >
+            LOADING
+          </text>
+
+          <mask id="text_mask">
+            <use x="0" y="0" xlink:href="#text" opacity="1" fill="#3498db" />
+          </mask>
+        </defs>
+
+        <use x="0" y="0" xlink:href="#text" fill="#3498db" />
+
+        <rect
+          class="water-fill"
+          mask="url(#text_mask)"
+          fill="url(#water)"
+          x="-400"
+          y="0"
+          width="1600"
+          height="120"
+        />
+      </svg>
+    </div>
+    <!-- 左区侧边栏 -->
+    <aside class="flex column">
+      <div class="daoHang">
+        <a href="/test1.html" title="别点" target="_blank">
+          <span class="zhuye">主页</span>
+        </a>
+      </div>
+      <div class="daoHang">导航</div>
+      <div class="daoHang">导航</div>
+      <div class="daoHang">导航</div>
+      <div class="daoHang">导航</div>
+    </aside>
+    <!-- 右区 -->
+    <div class="flex column" style="flex: 1">
+      <!-- 我的页眉 -->
+      <header style="height: 100px" class="flex column">
+        <h1 class="flex center">我的元素学习页面</h1>
+      </header>
+      <!-- 主内容 -->
+      <main class="flex column" style="height: 1000px">
+        <div>内容区</div>
+      </main>
+      <!-- 页脚 -->
+      <footer>
+        <p>&copy; 2025 Coke的网站</p>
+      </footer>
+    </div>
+  </body>
+</html>

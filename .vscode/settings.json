@@ -1,0 +1,8 @@
+{
+  "search-online.search-engine": "Bing",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "notebook.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.autoClosingOvertype": "always",
+  "editor.autoClosingBrackets": "beforeWhitespace",
+  "editor.autoClosingQuotes": "beforeWhitespace"
+}
