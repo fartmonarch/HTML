@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="viewport" content="width=device-width, user-scalable=no">
+	<title>图片变成数字（TXT导出按钮）</title>
+<style>
+body{
+	box-sizing: border-box;
+	margin: 0;
+	padding: 4vw;
+	font-size: min(4vw,4vh);
+}
+button,input{
+	display: block;
+	font-size: min(4vw,4vh);
+	margin: min(2vw,2vh);
+}
+</style>
+</head>
+<body>
+<input type="file" accept="image/*" onchange="设置图片(this)">
+<div>数字尺寸: <span id="数字尺寸显示">10</span></div>
+<button onclick="数字尺寸变化(2)">数字尺寸+</button>
+<button onclick="数字尺寸变化(-2)">数字尺寸-</button>
+<button onclick="导出TXT()">导出TXT</button>
+<img style="" src="" alt="请选择图片">
+<script>
+"use strict";
+var 数字尺寸 = 10; // 用2的倍数（横向压缩一半保持紧凑）
+var 数字与黑度;
+var resultTextGlobal = ""; // 存储处理后的文本结果
+
+// 预处理0~9的数字黑度数据
+function 处理数字(){
+	数字与黑度 = [];
+	var 临时画布元素 = document.createElement("canvas");
+	临时画布元素.width = 数字尺寸/2;
+	临时画布元素.height = 数字尺寸;
+	var 临时画布 = 临时画布元素.getContext("2d", {willReadFrequently: true});
+	临时画布.textAlign = "center";
+	临时画布.textBaseline = "middle";
+	临时画布.font = 数字尺寸 + "px Arial";
+	var 读取的画布数据;
+	for(var i=0; i<=9; i++){
+		临时画布.fillStyle = "#fff";
+		临时画布.fillRect(0, 0, 数字尺寸/2, 数字尺寸);
+		临时画布.fillStyle = "#000";
+		临时画布.fillText(i, 数字尺寸/4, 数字尺寸/2);
+		读取的画布数据 = 临时画布.getImageData(0, 0, 数字尺寸/2, 数字尺寸);
+		var 黑度计数 = 0;
+		for(var j = 0; j < 读取的画布数据.data.length; j += 4){
+			if(读取的画布数据.data[j+3] == 0) continue;
+			黑度计数 += 1 - (
+                (读取的画布数据.data[j] +
+                 读取的画布数据.data[j+1] +
+                 读取的画布数据.data[j+2]) / 255 / 3
+            ) * (读取的画布数据.data[j+3] / 255);
+		}
+		黑度计数 /= ((数字尺寸/2) * 数字尺寸);
+		数字与黑度.push(黑度计数);
+	}
+	var 最大黑度 = 0;
+	var 最小黑度 = 1;
+	for(var i=0; i<数字与黑度.length; i++){
+		if(数字与黑度[i] > 最大黑度) 最大黑度 = 数字与黑度[i];
+		if(数字与黑度[i] < 最小黑度) 最小黑度 = 数字与黑度[i];
+	}
+	for(var i=0; i<数字与黑度.length; i++){
+		数字与黑度[i] = (数字与黑度[i] - 最小黑度) / (最大黑度 - 最小黑度);
+	}
+}
+处理数字();
+
+// 根据黑度值找出最接近的数字
+function 最接近的数字(黑度){
+	var 序号 = -1;
+	var 最小差值 = 1;
+	for(var i=0; i<数字与黑度.length; i++){
+		var 差值 = Math.abs(数字与黑度[i] - 黑度);
+		if(差值 <= 最小差值){
+			最小差值 = 差值;
+			序号 = i;
+		}
+	}
+	return 序号;
+}
+
+var 图片元素 = document.querySelector("img");
+var 图片加载完成 = false;
+
+// 选择图片后加载，并在加载完成后处理
+function 设置图片(输入){
+	var src = window.URL.createObjectURL(输入.files[0]);
+	图片元素.src = src;
+	图片元素.onload = function(){
+		图片加载完成 = true;
+		处理图片();
+	}
+}
+
+// 处理图片并将结果存储到resultTextGlobal中
+function 处理图片(){
+	var 临时画布元素 = document.createElement("canvas");
+	临时画布元素.width = 图片元素.width;
+	临时画布元素.height = 图片元素.height;
+	var 临时画布 = 临时画布元素.getContext("2d", {willReadFrequently: true});
+	临时画布.drawImage(图片元素, 0, 0);
+	var resultText = "";
+	// 遍历每一行（y方向步长为数字尺寸）
+	for(var by = 0; by < 临时画布元素.height; by += 数字尺寸){
+		var line = "";
+		// 遍历每一列（x方向步长为 数字尺寸/2）
+		for(var bx = 0; bx < 临时画布元素.width; bx += 数字尺寸/2){
+			var 读取的画布数据 = 临时画布.getImageData(bx, by, 数字尺寸/2, 数字尺寸);
+			var 黑度计数 = 0;
+			for(var j = 0; j < 读取的画布数据.data.length; j += 4){
+				if(读取的画布数据.data[j+3] == 0) continue;
+				黑度计数 += 1 - (
+                    (读取的画布数据.data[j] +
+                     读取的画布数据.data[j+1] +
+                     读取的画布数据.data[j+2]) / 255 / 3
+                ) * (读取的画布数据.data[j+3] / 255);
+			}
+			黑度计数 /= ((数字尺寸/2) * 数字尺寸);
+			var 选择数字 = 最接近的数字(黑度计数);
+			line += 选择数字;
+		}
+		resultText += line + "\n";
+	}
+	resultTextGlobal = resultText;
+	alert("图片处理完成，可以点击‘导出TXT’按钮下载结果。");
+}
+
+// 通过Blob下载txt文件
+function downloadTxtFile(content) {
+	var blob = new Blob([content], { type: "text/plain;charset=utf-8" });
+	var url = URL.createObjectURL(blob);
+	var a = document.createElement("a");
+	a.href = url;
+	a.download = "output.txt";
+	document.body.appendChild(a);
+	a.click();
+	document.body.removeChild(a);
+	URL.revokeObjectURL(url);
+}
+
+// 导出TXT文件函数，由按钮触发
+function 导出TXT(){
+	if(resultTextGlobal){
+		downloadTxtFile(resultTextGlobal);
+	} else {
+		alert("请先加载并处理图片！");
+	}
+}
+
+// 修改数字尺寸并更新显示，若图片加载完成则重新处理
+function 数字尺寸变化(数值){
+	数字尺寸 += 数值;
+	if(数字尺寸 < 6) 数字尺寸 = 6;
+	document.getElementById("数字尺寸显示").textContent = 数字尺寸;
+	处理数字();
+	if(图片加载完成) 处理图片();
+}
+</script>
+</body>
+</html>
