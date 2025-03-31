@@ -1,0 +1,20 @@
+/* 基础重置 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+  border: 1px solid rgb(228, 37, 12);
+}
+/* 主容器 */
+.main-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f0f2f5;
+}
+
+body {
+  border: 200px;
+  background-color: bisque;
+}

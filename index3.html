@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flex布局简历 - 张三</title>
+    <style>
+        /* 全局样式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box; /* 确保元素尺寸包含边框 */
+            font-family: '微软雅黑', sans-serif; /* 设置中文字体 */
+        }
+
+        /* 页面基础样式 */
+        body {
+            background-color: #f5f5f5;
+            line-height: 1.6; /* 行高设置 */
+            padding: 20px; /* 添加页面边距 */
+        }
+
+        /* 主容器：使用Flex纵向布局 */
+        .container {
+            max-width: 800px;
+            margin: 0 auto; /* 水平居中 */
+            padding: 30px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            display: flex; /* 启用Flex容器 */
+            flex-direction: column; /* 纵向排列子元素 */
+            gap: 30px; /* 子元素间距 */
+        }
+
+        /* 头部区域 */
+        header {
+            text-align: center;
+            display: flex; /* 内部Flex布局 */
+            flex-direction: column; /* 纵向排列 */
+            gap: 10px; /* 元素间距 */
+        }
+
+        /* 标题样式 */
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+        }
+
+        /* 联系信息容器 */
+        .contact-info {
+            display: flex;
+            justify-content: space-between; /* 两端对齐 */
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px; /* 圆角效果 */
+        }
+
+        /* 联系信息列样式 */
+        .contact-column {
+            display: flex;
+            flex-direction: column;
+            gap: 8px; /* 行间距 */
+        }
+
+        /* 模块通用样式 */
+        section {
+            display: flex;
+            flex-direction: column;
+            gap: 15px; /* 内部元素间距 */
+        }
+
+        /* 模块标题样式 */
+        h2 {
+            color: #3498db;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+            font-size: 1.4em;
+        }
+
+        /* 教育/经历项目容器 */
+        .education-item, .experience-item {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        /* 时间线布局 */
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            align-items: center; /* 垂直居中 */
+        }
+
+        /* 技能容器 */
+        .skills {
+            display: flex;
+            flex-wrap: wrap; /* 允许换行 */
+            gap: 10px; /* 技能项间距 */
+        }
+
+        /* 单个技能样式 */
+        .skill-item {
+            background: #ecf0f1;
+            padding: 8px 15px;
+            border-radius: 20px; /* 胶囊形状 */
+            flex: 0 0 auto; /* 不伸缩不收缩 */
+        }
+
+        /* 项目列表样式 */
+        ul {
+            padding-left: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        /* 响应式设计：小于600px屏幕 */
+        @media (max-width: 600px) {
+            .contact-info {
+                flex-direction: column; /* 纵向排列 */
+                gap: 15px;
+            }
+            
+            .skills {
+                flex-direction: column; /* 纵向排列技能项 */
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 主容器 -->
+    <div class="container">
+        <!-- 头部信息 -->
+        <header>
+            <h1>张三</h1>
+            <p>前端开发工程师</p>
+        </header>
+
+        <!-- 联系信息 -->
+        <div class="contact-info">
+            <div class="contact-column">
+                <p>📧 zhangsan@email.com</p>
+                <p>📱 138-1234-5678</p>
+            </div>
+            <div class="contact-column">
+                <p>📍 北京市朝阳区</p>
+                <p>🌐 www.zhangsan.com</p>
+            </div>
+        </div>
+
+        <!-- 教育背景模块 -->
+        <section>
+            <h2>教育背景</h2>
+            <div class="education-item">
+                <div class="timeline">
+                    <h3>清华大学</h3>
+                    <p>2019.09 - 2023.06</p>
+                </div>
+                <p>计算机科学与技术 | 学士学位</p>
+                <p>GPA: 3.8/4.0</p>
+            </div>
+        </section>
+
+        <!-- 工作经历模块 -->
+        <section>
+            <h2>工作经历</h2>
+            <div class="experience-item">
+                <div class="timeline">
+                    <h3>字节跳动</h3>
+                    <p>2023.07 - 至今</p>
+                </div>
+                <p>前端开发工程师</p>
+                <ul>
+                    <li>负责Web前端功能开发与性能优化</li>
+                    <li>使用Vue.js框架开发企业级应用</li>
+                    <li>团队代码评审与技术方案设计</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 技能模块 -->
+        <section>
+            <h2>技能专长</h2>
+            <div class="skills">
+                <div class="skill-item">HTML5/CSS3</div>
+                <div class="skill-item">JavaScript/ES6+</div>
+                <div class="skill-item">Vue.js/React</div>
+                <div class="skill-item">Webpack/Vite</div>
+                <div class="skill-item">Node.js基础</div>
+                <div class="skill-item">Git版本控制</div>
+            </div>
+        </section>
+
+        <!-- 项目经验模块 -->
+        <section>
+            <h2>项目经验</h2>
+            <div class="experience-item">
+                <div class="timeline">
+                    <h3>在线教育平台</h3>
+                    <p>2024.03 - 2024.06</p>
+                </div>
+                <ul>
+                    <li>使用Vue3 + TypeScript开发前端应用</li>
+                    <li>实现课程管理、直播授课等核心功能</li>
+                    <li>优化首屏加载速度至1.5秒内</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

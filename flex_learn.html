@@ -1,38 +1,249 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FlexLearn_demo</title>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Flex布局学习白板</title>
     <link rel="icon" href="images/avatar.ico" type="image/x-icon" />
     <style>
-      body {
+        /* 基础样式 */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-        margin: 150px;
-        height: 150vh;
-        background-color: #eee;
-      }
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f0f2f5;
+        }
 
-      * {
-        border: 1px solid black;
-      }
+        /* 控制面板样式 */
+        .controls {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
 
-      .flex {
-        display: flex;
-      }
-      .flex1 {
-        flex: 1;
-      }
-      .flex2 {
-        flex: 3;
-      }
-      
+        .control-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        select, input[type="range"] {
+            padding: 5px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+
+        /* 白板容器 */
+        .playground {
+            flex: 1;
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Flex容器 */
+        .flex-container {
+            display: flex;
+            border: 2px dashed #3498db;
+            background: #f8f9fa;
+            min-height: 300px;
+            padding: 10px;
+            gap: 10px;
+            transition: all 0.3s;
+        }
+
+        /* Flex项目 */
+        .flex-item {
+            background: #3498db;
+            color: white;
+            padding: 20px;
+            min-width: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        /* 代码展示区 */
+        .code-display {
+            margin-top: 20px;
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
     </style>
-  </head>
-  <body class="flex">
-    <!-- 左区 -->
-    <div class="flex flex1"></div>
-    <!-- 右区 -->
-    <div class="flex  flex2"></div>
-  </body>
+</head>
+<body>
+    <!-- 控制面板 -->
+    <div class="controls">
+        <div class="control-group">
+            <label>
+                flex-direction:
+                <select id="flexDirection">
+                    <option value="row">row</option>
+                    <option value="row-reverse">row-reverse</option>
+                    <option value="column">column</option>
+                    <option value="column-reverse">column-reverse</option>
+                </select>
+            </label>
+            
+            <label>
+                justify-content:
+                <select id="justifyContent">
+                    <option value="flex-start">flex-start</option>
+                    <option value="flex-end">flex-end</option>
+                    <option value="center">center</option>
+                    <option value="space-between">space-between</option>
+                    <option value="space-around">space-around</option>
+                    <option value="space-evenly">space-evenly</option>
+                </select>
+            </label>
+            
+            <label>
+                align-items:
+                <select id="alignItems">
+                    <option value="stretch">stretch</option>
+                    <option value="flex-start">flex-start</option>
+                    <option value="flex-end">flex-end</option>
+                    <option value="center">center</option>
+                    <option value="baseline">baseline</option>
+                </select>
+            </label>
+        </div>
+        
+        <div class="control-group">
+            <label>
+                flex-wrap:
+                <select id="flexWrap">
+                    <option value="nowrap">nowrap</option>
+                    <option value="wrap">wrap</option>
+                    <option value="wrap-reverse">wrap-reverse</option>
+                </select>
+            </label>
+            
+            <label>
+                align-content:
+                <select id="alignContent">
+                    <option value="stretch">stretch</option>
+                    <option value="flex-start">flex-start</option>
+                    <option value="flex-end">flex-end</option>
+                    <option value="center">center</option>
+                    <option value="space-between">space-between</option>
+                    <option value="space-around">space-around</option>
+                </select>
+            </label>
+            
+            <label>
+                项目数量:
+                <input type="range" id="itemCount" min="3" max="8" value="5">
+            </label>
+        </div>
+        
+        <button onclick="resetSettings()">重置设置</button>
+    </div>
+
+    <!-- 布局演示区 -->
+    <div class="playground">
+        <div class="flex-container" id="flexContainer">
+            <div class="flex-item">1</div>
+            <div class="flex-item">2</div>
+            <div class="flex-item">3</div>
+            <div class="flex-item">4</div>
+            <div class="flex-item">5</div>
+        </div>
+        
+        <!-- 代码展示 -->
+        <div class="code-display" id="codeDisplay"></div>
+    </div>
+
+    <script>
+        // 获取DOM元素
+        const container = document.getElementById('flexContainer');
+        const controls = {
+            flexDirection: document.getElementById('flexDirection'),
+            justifyContent: document.getElementById('justifyContent'),
+            alignItems: document.getElementById('alignItems'),
+            flexWrap: document.getElementById('flexWrap'),
+            alignContent: document.getElementById('alignContent'),
+            itemCount: document.getElementById('itemCount')
+        };
+
+        // 更新布局函数
+        function updateLayout() {
+            // 更新容器样式
+            container.style.flexDirection = controls.flexDirection.value;
+            container.style.justifyContent = controls.justifyContent.value;
+            container.style.alignItems = controls.alignItems.value;
+            container.style.flexWrap = controls.flexWrap.value;
+            container.style.alignContent = controls.alignContent.value;
+            
+            // 更新项目数量
+            const items = container.querySelectorAll('.flex-item');
+            const targetCount = parseInt(controls.itemCount.value);
+            
+            if(items.length > targetCount) {
+                items.forEach((item, index) => {
+                    item.style.display = index < targetCount ? 'flex' : 'none';
+                });
+            }
+            
+            updateCodeDisplay();
+        }
+
+        // 更新代码展示
+        function updateCodeDisplay() {
+            const cssCode = `.flex-container {
+    display: flex;
+    flex-direction: ${controls.flexDirection.value};
+    justify-content: ${controls.justifyContent.value};
+    align-items: ${controls.alignItems.value};
+    flex-wrap: ${controls.flexWrap.value};
+    align-content: ${controls.alignContent.value};
+}`;
+            
+            document.getElementById('codeDisplay').textContent = cssCode;
+        }
+
+        // 重置设置
+        function resetSettings() {
+            Object.values(controls).forEach(control => {
+                if(control.type !== 'range') {
+                    control.value = control.querySelector('option').value;
+                } else {
+                    control.value = 5;
+                }
+            });
+            updateLayout();
+        }
+
+        // 事件监听
+        Object.values(controls).forEach(control => {
+            control.addEventListener('change', updateLayout);
+        });
+
+        // 初始化
+        updateLayout();
+    </script>
+</body>
 </html>

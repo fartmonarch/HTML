@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>复杂Flex布局模板</title>
+    <style>
+      /* 基础重置 */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", sans-serif;
+        border: 1px solid rgb(228, 37, 12);
+      }
+
+      /* 主容器 */
+      .main-container {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        background: #f0f2f5;
+      }
+
+      /* 头部 - 水平Flex */
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 2rem;
+        background: #2c3e50;
+        color: white;
+      }
+
+      /* 主体内容 - 嵌套Flex */
+      .content-wrapper {
+        flex: 1;
+        display: flex;
+        gap: 20px;
+        padding: 20px;
+      }
+
+      /* 侧边栏 - 垂直Flex */
+      .sidebar {
+        width: 250px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      /* 主内容区 - 复杂嵌套 */
+      .main-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      /* 卡片容器 - 水平换行Flex */
+      .card-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        justify-content: space-around;
+      }
+
+      /* 单个卡片 - 垂直Flex */
+      .card {
+        flex: 1 1 300px;
+        min-height: 200px;
+        background: white;
+        border-radius: 10px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: transform 0.3s;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+      }
+
+      /* 图表区 - 反向Flex */
+      .chart-section {
+        display: flex;
+        flex-direction: row-reverse;
+        gap: 20px;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        margin-top: 20px;
+      }
+
+      /* 图表容器 */
+      .chart-container {
+        flex: 2;
+        min-height: 300px;
+        background: #f8f9fa;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* 图例 - 垂直Flex */
+      .chart-legend {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px;
+      }
+
+      /* 页脚 - 多行Flex */
+      .footer {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        justify-content: space-around;
+        padding: 2rem;
+        background: #34495e;
+        color: white;
+      }
+
+      /* 响应式设计 */
+      @media (max-width: 768px) {
+        .content-wrapper {
+          flex-direction: column;
+        }
+
+        .sidebar {
+          width: 100%;
+          order: -1;
+        }
+
+        .chart-section {
+          flex-direction: column;
+        }
+
+        .card {
+          flex-basis: 100%;
+        }
+      }
+
+      /* 装饰样式 */
+      .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+      .nav-menu {
+        display: flex;
+        gap: 20px;
+      }
+      .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .color-box {
+        width: 20px;
+        height: 20px;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main-container">
+      <!-- 头部 -->
+      <header class="header">
+        <div class="logo">FlexComplex</div>
+        <nav class="nav-menu">
+          <span>首页</span>
+          <span>产品</span>
+          <span>服务</span>
+          <span>联系我们</span>
+        </nav>
+      </header>
+
+      <!-- 主体内容 -->
+      <div class="content-wrapper">
+        <!-- 侧边栏 -->
+        <aside class="sidebar">
+          <h3>导航菜单</h3>
+          <div class="menu-item">仪表盘</div>
+          <div class="menu-item">数据分析</div>
+          <div class="menu-item">用户管理</div>
+          <div class="menu-item">系统设置</div>
+        </aside>
+
+        <!-- 主内容区 -->
+        <main class="main-content">
+          <!-- 卡片区 -->
+          <section class="card-container">
+            <article class="card">
+              <h3>销售数据</h3>
+              <p>本月销售额：¥1,234,567</p>
+              <div class="progress-bar"></div>
+            </article>
+            <article class="card">
+              <h3>用户增长</h3>
+              <p>新增用户：1,234 人</p>
+              <div class="progress-bar"></div>
+            </article>
+            <article class="card">
+              <h3>活跃度</h3>
+              <p>日活跃用户：56.7%</p>
+              <div class="progress-bar"></div>
+            </article>
+          </section>
+
+          <!-- 图表区 -->
+          <section class="chart-section">
+            <div class="chart-container">
+              <p>可视化图表区</p>
+            </div>
+            <div class="chart-legend">
+              <div class="legend-item">
+                <div class="color-box" style="background: #3498db"></div>
+                <span>第一季度</span>
+              </div>
+              <div class="legend-item">
+                <div class="color-box" style="background: #e74c3c"></div>
+                <span>第二季度</span>
+              </div>
+              <div class="legend-item">
+                <div class="color-box" style="background: #2ecc71"></div>
+                <span>第三季度</span>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
+
+      <!-- 页脚 -->
+      <footer class="footer">
+        <div class="footer-section">
+          <h4>关于我们</h4>
+          <p>企业简介</p>
+          <p>发展历程</p>
+        </div>
+        <div class="footer-section">
+          <h4>帮助中心</h4>
+          <p>文档中心</p>
+          <p>技术支持</p>
+        </div>
+        <div class="footer-section">
+          <h4>联系我们</h4>
+          <p>电话：400-123-4567</p>
+          <p>邮箱：contact@flex.com</p>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
