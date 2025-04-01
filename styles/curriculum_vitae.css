@@ -9,9 +9,25 @@
 /* 主容器 */
 .main-container {
   min-height: 100vh;
+  margin: 2px;
+  display: flex;
+  flex-direction: row;
+  background: #f0f2f5;
+}
+/* 左栏 */
+.left_container {
+  min-height: 100px;
   display: flex;
   flex-direction: column;
-  background: #f0f2f5;
+  flex: 1;
+}
+
+/* 右栏 */
+.right_container {
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  flex: 2;
 }
 
 body {
