@@ -1,47 +1,72 @@
-html {
-    font-size: 10px;
-    /* px 表示“像素（pixel）”: 基础字号为 10 像素 */
-    font-family:
-        "Open Sans", sans-serif;
-    /* 这应该是你从 Google Fonts 得到的其余输出。 */
-    background-color: #00539f;
+/* CSS样式 */
+.skills-section {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
-h1 {
-    font-size: 60px;
-    text-align: center;
+.section-title {
+  color: #2c3e50;
+  border-bottom: 3px solid #3498db;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
 }
 
-p,
-li {
-    font-size: 16px;
-    line-height: 2;
-    letter-spacing: 1px;
+.skill-list {
+  display: grid;
+  gap: 1.2rem;
 }
 
-p {
-    color: red;
-    width: 500px;
-    border: 1px solid black;
+.skill-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
-p,
-li,
-h1 {
-    color: red;
+.skill-name {
+  flex: 0 0 120px;
+  font-weight: 500;
+  color: #34495e;
 }
 
-body {
-    width: 600px;
-    margin: 0 auto;
-    background-color: #ff9500;
-    padding: 0 20px 20px 20px;
-    border: 5px solid black;
+.progress-bar {
+  flex: 1;
+  height: 12px;
+  background: #ecf0f1;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
 }
 
-h1 {
-    margin: 0;
-    padding: 20px 0;
-    color: #00539f;
-    text-shadow: 3px 3px 1px black;
+.progress-fill {
+  height: 100%;
+  width: var(--progress);
+  background: linear-gradient(90deg, #3498db, #6dd5fa);
+  border-radius: 6px;
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+/* 添加百分比文字显示 */
+.progress-fill::after {
+  content: var(--progress);
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+  font-size: 0.7em;
+  font-weight: bold;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+/* 可选：不同颜色的进度条 */
+.progress-fill.orange {
+  background: linear-gradient(90deg, #ff6b6b, #ff9f43);
+}
+.progress-fill.green {
+  background: linear-gradient(90deg, #2ecc71, #1abc9c);
 }

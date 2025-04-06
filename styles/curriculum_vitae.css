@@ -4,33 +4,291 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Segoe UI", sans-serif;
-  border: 1px solid rgb(228, 37, 12);
 }
+
+/* 整体页面背景 */
+body {
+  background-color: rgb(189, 180, 180); /* 原背景色 */
+  margin: 0;
+  padding: 0;
+}
+
 /* 主容器 */
 .main-container {
-  min-height: 100vh;
-  margin: 2px;
+  background-color: #f5f7fa;     /* 浅灰蓝，柔和不刺眼 */
+  margin: 40px auto;
+  padding: 40px;
+  max-width: 1200px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
   display: flex;
   flex-direction: row;
-  background: #f0f2f5;
+  min-height: 100vh;
 }
+
 /* 左栏 */
 .left_container {
-  min-height: 100px;
   display: flex;
   flex-direction: column;
   flex: 1;
+  background-color: transparent;
+  min-height: 100px;
 }
 
-/* 右栏 */
-.right_container {
-  min-height: 100px;
+/* 头像 */
+.photo {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  align-items: center;
+  justify-content: flex-start;
+}
+.circle-image {
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+
+/* 个人联系信息 */
+.connect {
   display: flex;
   flex-direction: column;
-  flex: 2;
+  justify-content: space-between;
+  background-color: transparent;
+}
+.connect h1 {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+.connect p {
+  font-size: 18px;
 }
 
-body {
-  border: 200px;
-  background-color: bisque;
+/* 基础信息 列表 */
+.baseinforma {
+  display: flex;
+  flex-direction: column;
+}
+.underline-li {
+  border: 1px solid #ccc;
+  border-bottom: 2px solid #4a90e2;
+  padding: 8px 12px;
+  margin-bottom: 5px;
+  list-style: none;
+  background-color: transparent;
+}
+
+/* 右栏容器 */
+.right_container {
+  flex: 2;
+  padding: 30px;
+  background-color: transparent;
+  margin: 20px;
+}
+
+/* 整个项目经历区块 */
+.experience-section {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  background-color: transparent;
+}
+
+/* 标题和下划线容器 */
+.section-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-bottom: 15px;
+}
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #333;
+  padding: 0 10px 5px;
+  position: relative;
+  display: inline-block;
+}
+.thick-underline {
+  width: 100%;
+  height: 4px;
+  background: #4a90e2;
+  margin-top: 5px;
+}
+
+/* 项目内容区块 */
+.project-content {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  background-color: transparent;
+}
+.project-item {
+  padding: 20px;
+  border-left: 3px solid #eee;
+  transition: all 0.3s;
+  background-color: transparent;
+}
+.project-item:hover {
+  border-left-color: #666;
+  background: #f0f3f8;
+}
+
+/* 下部 */
+.underbody {
+  display: flex;
+  flex-direction: row;
+  background-color: transparent;
+}
+
+/* 下部左 */
+.bottomleft {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: 20px;
+  background-color: transparent;
+}
+
+/* 教育经历 */
+.education {
+  display: flex;
+  flex-direction: column;
+  background-color: transparent;
+}
+.education h3 {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3em;
+}
+
+/* 软件技能 */
+.softskill {
+  display: flex;
+  flex-direction: column;
+  background-color: transparent;
+}
+.skill-list {
+  display: grid;
+  gap: 1.2rem;
+}
+.skill-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: transparent;
+}
+.skill-name {
+  flex: 0 0 120px;
+  font-weight: 500;
+  color: #34495e;
+}
+
+/* 进度条 */
+.progress-bar {
+  flex: 1;
+  height: 12px;
+  background-color: #e0e4eb !important;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+.progress-fill {
+  height: 100%;
+  width: var(--progress);
+  background: linear-gradient(90deg, #4a90e2, #6fb3f2) !important;
+  border-radius: 6px;
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+.progress-fill::after {
+  content: var(--progress);
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+  font-size: 0.7em;
+  font-weight: bold;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* 下部右 */
+.bottomright {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: 20px;
+  background-color: transparent;
+}
+
+/* 自我评价 */
+.selfeval {
+  display: flex;
+  flex-direction: column;
+  background-color: transparent;
+}
+
+/* 专业技能 */
+.professskill {
+  display: flex;
+  flex-direction: column;
+  height: 160px;
+  background-color: transparent;
+}
+
+/* 语言水平 */
+.languagelevel {
+  display: flex;
+  flex-direction: column;
+  background-color: transparent;
+}
+.ellipse-wrap {
+  border: 1px solid #000;
+  border-radius: 50px;
+  padding: 5px 15px;
+  display: inline-block;
+  white-space: nowrap;
+  box-sizing: border-box;
+  align-self: flex-start;
+  flex: 0 0 auto;
+  background-color: transparent;
+}
+
+/* 证书 */
+.certificate {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  background-color: transparent;
+}
+
+/* 标签自动换行 */
+.certificate > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* 交互元素配色 */
+a,
+button {
+  color: #4a90e2;
+}
+a:hover,
+button:hover {
+  color: #356bb5;
+}
+
+/* 打印时效果优化 */
+@media print {
+  body {
+    background-color: white !important;
+  }
+  .main-container {
+    box-shadow: none;
+    margin: 0;
+    border: none;
+  }
 }

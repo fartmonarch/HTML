@@ -12,24 +12,158 @@
       <!-- 左栏 -->
       <div class="left_container">
         <!-- 头像 -->
-        <div ></div>
-        <!-- 个人信息 -->
-        <div></div>
+        <div class="photo">
+          <img src="images/avatar.jpg" class="circle-image" alt="个人照片" />
+        </div>
+        <!-- 个人联系信息 -->
+        <div class="connect">
+          <h1>张某三 Zhang Mousang</h1>
+          <nav style="height: 100px; align-items: flex-end">
+            <p>电话:400-123-4567</p>
+            <p>微信:abcdfeg</p>
+            <p>邮箱:contact@qq.com</p>
+          </nav>
+        </div>
         <!-- 基础信息 -->
-        <div></div>
+        <div>
+          <ul style="display: flex; flex-direction: column;">
+            <li class="underline-li">性别：               男</li>
+            <li class="underline-li">列表项 2</li>
+            <li class="underline-li">列表项 3</li>
+            <li class="underline-li">列表项 4</li>
+            <li class="underline-li">列表项 5</li>
+            <li class="underline-li">列表项 6</li>
+            <li class="underline-li">列表项 7</li>
+            <li class="underline-li">列表项 8</li>
+            <li class="underline-li">列表项 9</li>
+          </ul>
+        </div>
         <!-- 项目集 -->
         <div></div>
       </div>
       <!-- 右栏 -->
       <div class="right_container">
-        <!-- 上部 -->
-        <div>
-          <!-- 工作经历 -->
+        <!-- 上部项目经历模块 -->
+        <div class="experience-section">
+          <!-- 标题和下划线容器 -->
+          <div class="section-header">
+            <h2 class="section-title">项目经历</h2>
+            <div class="thick-underline"></div>
+          </div>
+          <!-- 项目内容 -->
+          <div class="project-content">
+            <div class="project-item">
+              <h3>项目一名称</h3>
+              <p>项目描述文字...</p>
+            </div>
+            <div class="project-item">
+              <h3>项目二名称</h3>
+              <p>项目描述文字...</p>
+            </div>
+            <div class="project-item">
+              <h3>项目三名称</h3>
+              <p>项目描述文字...</p>
+            </div>
+          </div>
         </div>
         <!--  下部-->
-        <div>
+        <div class="underbody">
           <!-- 下部左 -->
+          <div class="bottomleft">
+            <!-- 教育经历 -->
+            <div class="education">
+              <div class="section-header">
+                <h2 class="section-title">教育经历</h2>
+                <div class="thick-underline"></div>
+              </div>
+              <h3>
+                <span style="font-size: 20px">杭州电子科技大学</span>
+                <span>数学与计算机科学学院</span>
+                <span>计算机科学与技术专业</span>
+                <span
+                  style="
+                    display: flex;
+                    justify-content: flex-end;
+                    font-size: 1rem;
+                  "
+                >
+                  2023/9-2027/6
+                </span>
+                <p style="height: 150px">以下是一些校园经历和学过的专业</p>
+              </h3>
+            </div>
+            <!-- 软件技能 -->
+            <div class="softskill">
+              <div class="section-header">
+                <h2 class="section-title">软件技能</h2>
+                <div class="thick-underline"></div>
+              </div>
+              <!-- 单个技能项 -->
+              <div class="skill-list">
+                <div class="skill-item">
+                  <span class="skill-name">Photoshop</span>
+                  <div class="progress-bar">
+                    <div class="progress-fill" style="--progress: 85%"></div>
+                  </div>
+                </div>
+
+                <div class="skill-item">
+                  <span class="skill-name">Figma</span>
+                  <div class="progress-bar">
+                    <div class="progress-fill" style="--progress: 90%"></div>
+                  </div>
+                </div>
+
+                <div class="skill-item">
+                  <span class="skill-name">Blender</span>
+                  <div class="progress-bar">
+                    <div class="progress-fill" style="--progress: 70%"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
           <!-- 下部右 -->
+          <div class="bottomright">
+            <!-- 自我评价 -->
+            <div class="selfeval">
+              <div class="section-header">
+                <h2 class="section-title">自我评价</h2>
+                <div class="thick-underline"></div>
+              </div>
+              <p>
+                性格乐观开朗，对生活充满热情，勤勉坚毅；兴趣广泛，爱好音乐，体育活动，有健康的体魄；注重团队精神，有责任心；注重细节，认真负责；具有快速的适应能力和较强的学习能力；凡事踏踏实实，尽心尽力，善始善终。
+              </p>
+            </div>
+            <!-- 专业技能 -->
+            <div class="professskill">
+              <div class="section-header">
+                <h2 class="section-title">专业技能</h2>
+                <div class="thick-underline"></div>
+              </div>
+              <p><strong>剪辑能力:</strong>babababab</p>
+              <p><strong>组织能力:</strong>babababab</p>
+            </div>
+            <!-- 语言水平 -->
+            <div class="languagelevel">
+              <div class="section-header">
+                <h2 class="section-title">语言水平</h2>
+                <div class="thick-underline"></div>
+              </div>
+              <span class="ellipse-wrap">英语(CET - 4)</span>
+            </div>
+            <!-- 证书 -->
+            <div class="certificate">
+              <div class="section-header">
+                <h2 class="section-title">证书</h2>
+                <div class="thick-underline"></div>
+              </div>
+              <div>
+                <span class="ellipse-wrap">Aci</span>
+                <span class="ellipse-wrap">ADot</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
