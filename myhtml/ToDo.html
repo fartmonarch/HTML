@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>传统DOM操作计划清单</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      #todo-input {
+        padding: 8px;
+        width: 70%;
+      }
+      button {
+        padding: 8px 15px;
+      }
+      ul {
+        list-style: none;
+        padding: 0;
+      }
+      li {
+        padding: 8px;
+        margin: 5px 0;
+        background: #f5f5f5;
+        display: flex;
+        justify-content: space-between;
+      }
+      .delete-btn {
+        color: red;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>计划清单 (DOM操作版)</h1>
+
+    <div>
+      <input type="text" id="todo-input" placeholder="输入计划内容" />
+      <button id="add-btn">添加</button>
+    </div>
+
+    <ul id="todo-list"></ul>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const todoInput = document.getElementById("todo-input");
+        const addBtn = document.getElementById("add-btn");
+        const todoList = document.getElementById("todo-list");
+
+        // 获取输入框的值并去除两端空格
+        const todoText = todoInput.value.trim();
+        if (todoText) {
+          // 如果输入框有值，调用添加计划项的函数并清空输入框
+          addTodoItem(todoText);
+          todoInput.value = "";
+        }
+
+        // 监听输入框的回车键事件
+        todoInput.addEventListener("keyup", function (e) {
+          if (e.key === "Enter") {
+            // 如果按下的是回车键，触发添加按钮的点击事件
+            addBtn.click();
+          }
+        });
+
+        // 定义添加单个计划项到DOM的函数
+        function addTodoItem(text) {
+          // 创建一个列表项元素 <li>
+          const li = document.createElement("li");
+
+          // 创建一个 <span> 元素用于显示计划项的文本
+          const span = document.createElement("span");
+          span.textContent = text; // 设置 <span> 的文本内容为传入的文本
+
+          // 创建一个 <span> 元素作为删除按钮
+          const deleteBtn = document.createElement("span");
+          deleteBtn.textContent = "×"; // 设置删除按钮的文本为 "×"
+          deleteBtn.className = "delete-btn"; // 为删除按钮添加类名，方便样式控制
+
+          // 为删除按钮绑定点击事件
+          deleteBtn.addEventListener("click", function () {
+            li.remove(); // 点击删除按钮时，移除对应的列表项
+          });
+
+          // 将文本和删除按钮添加到列表项中
+          li.appendChild(span);
+          li.appendChild(deleteBtn);
+        }
+      });
+    </script>
+  </body>
+</html>
